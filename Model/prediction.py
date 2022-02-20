@@ -10,3 +10,13 @@ predictions, probabilities = prediction.classifyImage(os.path.join(execution_pat
 
 for eachPrediction, eachProbability in zip(predictions, probabilities):
   print(eachPrediction , " : " , eachProbability)
+
+output = predictions[:3]
+
+textfile = open("output.txt", "w")
+
+for item in output:
+
+    textfile.write(element + "\n")
+
+textfile.close()
