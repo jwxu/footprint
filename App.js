@@ -7,7 +7,7 @@ import { DataViewer, Scanner, Home } from './src';
 
 export default function App() {
   return (
-    <Home></Home>
+    <DataViewer></DataViewer>
     // <View style={styles.container}>
     //   <Text>Open up App.js to start working on your app!</Text>
     //   <Text>TREEHACKS!!! LETS GOOOOO!!</Text>

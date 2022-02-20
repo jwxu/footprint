@@ -10,7 +10,7 @@ import { Block, Button, Text, NavBar, theme } from 'galio-framework';
 //     Tooltip,
 //     Legend
 //   } from 'recharts';
-import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
+import { VictoryLine, VictoryChart, VictoryTheme } from "victory-native";
 
 const { height, width } = Dimensions.get('screen');
 
@@ -18,12 +18,12 @@ import materialTheme from '../constants/Theme';
 import Images from '../constants/Images';
 import Data from '../constants/Data';
 
-const data = [
-    { year: 1, earnings: 13000 },
-    { year: 2, earnings: 16500 },
-    { year: 3, earnings: 14250 },
-    { year: 4, earnings: 19000 }
-  ];
+// const data = [
+//     { year: 1, earnings: 13000 },
+//     { year: 2, earnings: 16500 },
+//     { year: 3, earnings: 14250 },
+//     { year: 4, earnings: 19000 }
+//   ];
 
 export default class DataViewer extends React.Component {
 
@@ -47,11 +47,6 @@ export default class DataViewer extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <VictoryChart width={350} theme={VictoryTheme.material}>
-                <VictoryBar data={data} x="year" y="earnings" />
-                </VictoryChart>
-            </View>
         // <LineChart
         //     data={Data.US_CO2}
         //     >
@@ -67,56 +62,42 @@ export default class DataViewer extends React.Component {
         //         activeDot={{ r: 8 }}
         //     />
         // </LineChart>
-        // <Block flex style={styles.container}>
-        //     <StatusBar barStyle="light-content" />
+        <Block flex style={styles.container}>
+            <StatusBar barStyle="light-content" />
 
-        //     <LineChart
-        //         data={Data.US_CO2}
-        //         >
-        //         <CartesianGrid strokeDasharray="3 3" />
-        //         <XAxis dataKey="year" />
-        //         <YAxis />
-        //         <Tooltip />
-        //         <Legend />
-        //         <Line
-        //             type="monotone"
-        //             dataKey="co2_per_capita"
-        //             stroke="#8884d8"
-        //             activeDot={{ r: 8 }}
-        //         />
-        //     </LineChart>
-        //     {/* <Block flex center>
-        //     <ImageBackground
-        //         source={{  uri: Images.Foods[0] }}
-        //         style={{ height: height / 2, width: width, marginTop: '-55%', zIndex: 1 }}
-        //     />
+            {/* <Block flex center>
+            <ImageBackground
+                source={{  uri: Images.Foods[0] }}
+                style={{ height: height / 2, width: width, marginTop: '-55%', zIndex: 1 }}
+            />
             
-        //     </Block> */}
-        //     <Block flex space="between" style={styles.padded}>
-        //     <Block flex space="around" style={{ zIndex: 2 }}>
-        //         <Block>
-        //             <Block>
-        //                 <Text color="white" size={48}>Broccoli</Text>
-        //             </Block>
-        //             <Text size={16} color='rgba(255,255,255,0.6)'>
-        //                 0.57 KgCO2eq/Kg
-        //             </Text>
-        //             <Text size={16} color='rgba(255,255,255,0.6)'>
-        //                 325 Liters of Water / Kg
-        //             </Text>
-        //         </Block>
-        //         <Block center>
-        //         <Button
-        //             shadowless
-        //             style={styles.button}
-        //             color={materialTheme.COLORS.BUTTON_COLOR}
-        //             onPress={() => navigation.navigate('App')}>
-        //             SCAN ITEMS
-        //         </Button>
-        //         </Block>
-        //     </Block>
-        //     </Block>
-        // </Block>
+            </Block> */}
+            <Block flex space="between" style={styles.padded}>
+            <Block flex space="around" style={{ zIndex: 2 }}>
+                <Block>
+                    <Block>
+                        <Text color="white" size={48}>Broccoli</Text>
+                    </Block>
+                    <Text size={16} color='rgba(255,255,255,0.6)'>
+                        0.57 KgCO2eq/Kg
+                    </Text>
+                    <Text size={16} color='rgba(255,255,255,0.6)'>
+                        325 Liters of Water / Kg
+                    </Text>
+                </Block>
+                <Block center>
+                    <View style={styles.container}>
+                        <VictoryChart width={350} theme={VictoryTheme.material}>
+                        <VictoryLine style={{
+                            data: { stroke: "#c43a31" },
+                            parent: { border: "1px solid #ccc"}
+                        }} data={Data.US_CO2} x="year" y="co2_per_capita" />
+                        </VictoryChart>
+                    </View>
+                </Block>
+            </Block>
+            </Block>
+        </Block>
         );
     }
 }
