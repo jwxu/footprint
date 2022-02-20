@@ -24,12 +24,12 @@ export default class Home extends React.Component {
           <Block flex space="around" style={{ zIndex: 2 }}>
             <Block>
               <Block>
-                <Text color="white" size={60}>Sustainable</Text>
+                <Text color="white" size={64}>Footprint</Text>
               </Block>
-              <Block row>
+              {/* <Block row>
                 <Text color="white" size={60}>Shopping</Text>
-              </Block>
-              <Text size={16} color='rgba(255,255,255,0.6)'>
+              </Block> */}
+              <Text size={24} color='rgba(255,255,255,0.6)'>
                 Discover your carbon and water footprint
               </Text>
             </Block>
@@ -38,8 +38,15 @@ export default class Home extends React.Component {
                 shadowless
                 style={styles.button}
                 color={materialTheme.COLORS.BUTTON_COLOR}
-                onPress={() => navigation.navigate('Camera')}>
-                SCAN ITEMS
+                onPress={() => navigation.navigate('Scanner')}>
+                SCAN PRODUCT
+              </Button>
+              <Button
+                shadowless
+                style={styles.button}
+                color={materialTheme.COLORS.BUTTON_COLOR}
+                onPress={() => navigation.navigate('My Profile')}>
+                VIEW PROFILE
               </Button>
             </Block>
           </Block>
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
     position: 'relative',
-    bottom: theme.SIZES.BASE,
+    bottom: theme.SIZES.BASE * 2,
   },
   button: {
     width: width - theme.SIZES.BASE * 4,

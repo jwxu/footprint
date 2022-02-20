@@ -3,14 +3,12 @@
 import React from 'react';
 import { StyleSheet, Text, View ,TouchableOpacity,Platform, } from 'react-native';
 import { Camera } from 'expo-camera';
-import * as Permissions from 'expo-permissions';
+// import * as Permissions from 'expo-permissions';
 import { FontAwesome, Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 
-
-
-export default class App extends React.Component {
+export default class Scanner extends React.Component {
   state = {
     hasPermission: null,
     cameraType: Camera.Constants.Type.back,
@@ -23,13 +21,13 @@ export default class App extends React.Component {
   getPermissionAsync = async () => {
     // Camera roll Permission 
     if (Platform.OS === 'ios') {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
     }
     // Camera Permission
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
     this.setState({ hasPermission: status === 'granted' });
   }
 
@@ -46,10 +44,9 @@ export default class App extends React.Component {
   takePicture = async () => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync();
-
     }
   }
-
+  
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images
@@ -58,6 +55,7 @@ export default class App extends React.Component {
   
 
   render(){
+    const { navigation } = this.props;
     const { hasPermission } = this.state
     if (hasPermission === null) {
       return <View />;
@@ -67,7 +65,7 @@ export default class App extends React.Component {
       return (
           <View style={{ flex: 1 }}>
             <Camera style={{ flex: 1 }} type={this.state.cameraType}  ref={ref => {this.camera = ref}}>
-              <View style={{flex:1, flexDirection:"row",justifyContent:"space-between",margin:30}}>
+              <View style={{flex:1, flexDirection:"row", justifyContent:"space-between", margin: 10}}>
                 <TouchableOpacity
                   style={{
                     alignSelf: 'flex-end',
@@ -99,8 +97,7 @@ export default class App extends React.Component {
                     alignItems: 'center',
                     backgroundColor: 'transparent',
                   }}
-                  onPress={()=>this.handleCameraType()}
-                  >
+                  onPress={() => navigation.navigate('UserProfile')}>
                   <MaterialCommunityIcons
                       name="camera-switch"
                       style={{ color: "#fff", fontSize: 40}}
